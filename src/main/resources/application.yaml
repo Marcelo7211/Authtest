@@ -1,0 +1,60 @@
+spring:
+  application:
+    name: nerdFlix-authuser
+
+  jpa:
+    generate-ddl: true
+    database: postgresql
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  datasource:
+    url: jdbc:postgresql://ep-falling-wave-a5fxydag.us-east-2.aws.neon.tech/Database
+    username: Database_owner
+    password: H5QMd9VTKAgJ
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Brazil/East
+
+server:
+  port: 8087
+  servlet:
+    context-path: '/authuser/'
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    disable-swagger-default-url: true
+    use-root-path: true
+  packagesToScan: com.ead.authuser.controller
+
+ead:
+  serviceRegistry:
+    username: nerdFlix
+    password: 'Admin357'
+  auth:
+    jwtSecret: eyJhbGciOiJIUzUxMiJ9.ew0KICAic3ViIjogIjEyMzQ1Njc4OTAiLA0KICAibmFtZSI6ICJBbmlzaCBOYXRoIiwNCiAgImlhdCI6IDE1MTYyMzkwMjINCn0.yVUEaucDjW3_pqsTbe65V6ZiA7ac_EjiwYhAAGNBMGNyibUtGpNTvqMaJSPsTff1QPuc05Yhj1sMDgp6warP6Q
+    jwtExpirationMs: 28800000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: 'https://${ead.serviceRegistry.username}:${ead.serviceRegistry.password}@nerdcodeflix.onrender.com/eureka'
+  instance:
+    hostname: nerdcodeflix-joax.onrender.com
+    prefer-ip-address: false
+    secure-port-enabled: true
+    secure-port: 443
+    non-secure-port-enabled: false
+    instance-id: nerdFlix-authuser-instance-1
+    status-page-url: https://nerdcodeflix-joax.onrender.com/authuser/info
+    health-check-url: https://nerdcodeflix-joax.onrender.com/authuser/health
+    home-page-url: https://nerdcodeflix-joax.onrender.com/authuser/
+
+
